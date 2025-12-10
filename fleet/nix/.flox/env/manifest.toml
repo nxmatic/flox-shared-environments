@@ -1,0 +1,41 @@
+version = 1
+
+[include]
+  [[include.environments]]
+    remote = 'nxmatic/keyhole'
+
+[install]
+  [install.cachix]
+    pkg-path = 'cachix'
+
+  [install.deadnix]
+    pkg-path = 'deadnix'
+
+  [install.nix-eval-jobs]
+    pkg-path = 'nix-eval-jobs'
+
+  [install.nix-fast-build]
+    pkg-path = 'nix-fast-build'
+
+  [install.nix-output-monitor]
+    pkg-path = 'nix-output-monitor'
+
+  [install.nix-tree]
+    pkg-path = 'nix-tree'
+
+  [install.nixd]
+    pkg-path = 'nixd'
+
+  [install.nixfmt-rfc-style]
+    pkg-path = 'nixfmt-rfc-style'
+
+  [install.nvfetcher]
+    pkg-path = 'nvfetcher'
+
+  [install.statix]
+    pkg-path = 'statix'
+
+  [install.watchexec]
+    pkg-path = 'watchexec'
+
+[options]

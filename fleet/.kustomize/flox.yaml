@@ -1,0 +1,277 @@
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: git
+spec:
+  env:
+    name: git
+    version: 1
+  manifest:
+    include:
+      environments:
+      - remote: nxmatic/keyhole
+    install:
+      gh:
+        pkg-path: gh
+      git:
+        pkg-path: git
+      git-town:
+        pkg-path: git-town
+      gitflow:
+        pkg-path: gitflow
+    options: {}
+    profile:
+      common: |
+        if [ -d "${FLOX_ENV_PROJECT}/.github" ]; then
+          gh_login=""
+          if [ -n "${GH_TOKEN:-}" ]; then
+            gh_login=$(gh api user --jq '.login' 2>/dev/null || true)
+          elif command -v pass >/dev/null 2>&1; then
+            gh_secret=$(pass show coding/github@work 2>/dev/null | head -n 1 || true)
+            if [ -n "${gh_secret}" ]; then
+              gh_login=$(env GH_TOKEN="${gh_secret}" gh api user --jq '.login' 2>/dev/null || true)
+            fi
+          fi
+          if [ -n "${gh_login}" ]; then
+            remote=$(git -C "${FLOX_ENV_PROJECT}" remote get-url origin 2>/dev/null || true)
+            if [ -n "${remote}" ]; then
+              owner=$(printf '%s' "${remote}" | cut -d'/' -f 4)
+              repo_name=$(printf '%s' "${remote}" | cut -d'/' -f 5 | cut -d'.' -f 1)
+              export GITHUB_LOGIN="${gh_login}"
+              export GITHUB_OWNER="${owner}"
+              export GITHUB_REPOSITORY="${owner}/${repo_name}"
+            fi
+          fi
+        fi
+    version: 1
+---
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: home
+spec:
+  env:
+    name: home
+    version: 1
+  manifest:
+    include:
+      environments:
+      - remote: nxmatic/xdg
+      - remote: nxmatic/keyhole
+    install:
+      direnv:
+        pkg-path: direnv
+      linux-builder:
+        pkg-path: darwin.linux-builder
+        systems:
+        - aarch64-darwin
+      lldpd:
+        pkg-path: lldpd
+    options:
+      systems:
+      - aarch64-darwin
+      - aarch64-linux
+    profile:
+      common: |
+        mvnw_path="${FLOX_ENV_PROJECT}/mvnw"
+        if [ -x "${mvnw_path}" ]; then
+          maven_user_config="${FLOX_ENV_PROJECT}/.m2"
+          mkdir -p "${maven_user_config}"
+          export MAVEN_USER_CONFIG="${maven_user_config}"
+          export MAVEN_SETTINGS="${MAVEN_USER_CONFIG}/settings.xml"
+
+          if [ -n "${MAVEN_ARGS:-}" ]; then
+            case " ${MAVEN_ARGS} " in
+              *"--settings="*) ;;
+              *) export MAVEN_ARGS="${MAVEN_ARGS} --settings=${MAVEN_SETTINGS}" ;;
+            esac
+          else
+            export MAVEN_ARGS="--settings=${MAVEN_SETTINGS}"
+          fi
+
+          if [ -d "${FLOX_ENV_PROJECT}/.mvnrepository" ]; then
+            export MAVEN_LOCAL_REPOSITORY="${FLOX_ENV_PROJECT}/.mvnrepository"
+          elif [ -d "${FLOX_ENV_PROJECT}/.m2/repo" ]; then
+            export MAVEN_LOCAL_REPOSITORY="${FLOX_ENV_PROJECT}/.m2/repo"
+          fi
+
+          maven_version_output=$("${mvnw_path}" -N -q -DmavenVersion=3.9.9 \
+            -Dexpression=maven.version -Doutput=/dev/stdout help:evaluate 2>/dev/null | grep -v '^\[.*\]' | tail -n 1)
+          if [ -n "${maven_version_output}" ]; then
+            export MAVEN_VERSION="${maven_version_output}"
+          fi
+        fi
+    version: 1
+---
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: k8s
+spec:
+  env:
+    name: k8s
+    version: 1
+  manifest:
+    install:
+      ceph-client:
+        pkg-group: kubectl-tools
+        pkg-path: ceph-client
+        systems:
+        - aarch64-linux
+      cilium-cli:
+        pkg-group: kubectl-tools
+        pkg-path: cilium-cli
+      dasel:
+        pkg-group: yaml-tools
+        pkg-path: dasel
+        version: ^2.8.1
+      etcdctl:
+        pkg-group: etcd-tools
+        pkg-path: etcdctl
+        version: ^3.3.27
+      fluxcd:
+        pkg-group: kubectl-tools
+        pkg-path: fluxcd
+      helmfile:
+        pkg-group: kubectl-tools
+        pkg-path: helmfile
+      kpt:
+        pkg-group: kpt-tools
+        pkg-path: kpt
+      krew:
+        pkg-group: kubectl-tools
+        pkg-path: krew
+      kubecectl-doctor:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-doctor
+      kubectl:
+        pkg-group: kubectl-tools
+        pkg-path: kubectl
+      kubectl-ai:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-ai
+      kubectl-explore:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-explore
+      kubectl-graph:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-graph
+      kubectl-ktop:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-ktop
+      kubectl-neat:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-neat
+      kubectl-rook-ceph:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-rook-ceph
+      kubectl-tree:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-tree
+      kubectl-view-secret:
+        pkg-group: kubectl-plugins
+        pkg-path: kubectl-view-secret
+      kubernetes-helm:
+        pkg-group: kubectl-tools
+        pkg-path: kubernetes-helm
+      tubekit:
+        pkg-group: kubectl-tools
+        pkg-path: tubekit
+      yq-go:
+        pkg-group: yaml-tools
+        pkg-path: yq-go
+    options:
+      systems:
+      - aarch64-darwin
+      - aarch64-linux
+    version: 1
+---
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: keyhole
+spec:
+  env:
+    name: keyhole
+    version: 1
+  manifest:
+    install:
+      age:
+        pkg-path: age
+      gnupg:
+        pkg-path: gnupg
+      keychain:
+        pkg-path: keychain
+      pass:
+        pkg-path: pass
+      sops:
+        pkg-path: sops
+      ssh-to-age:
+        pkg-path: ssh-to-age
+    options: {}
+    profile:
+      common: |
+        if [[ -r $XDG_STATE_HOME/ssh-keys.d/github_signing ]]; then
+          set -a
+          SOPS_AGE_KEY="$( ssh-to-age -private-key < $XDG_STATE_HOME/ssh-keys.d/github_signing )"
+          set +a
+        fi
+    version: 1
+---
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: lima
+spec:
+  env:
+    name: lima
+    version: 1
+  manifest:
+    install:
+      lima:
+        pkg-path: lima
+      vmnet:
+        pkg-path: darwin.apple_sdk.frameworks.vmnet
+    options:
+      systems:
+      - aarch64-darwin
+      - x86_64-darwin
+    version: 1
+---
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: nix
+spec:
+  env:
+    name: nix
+    version: 1
+  manifest:
+    include:
+      environments:
+      - remote: nxmatic/keyhole
+    install:
+      cachix:
+        pkg-path: cachix
+      deadnix:
+        pkg-path: deadnix
+      nix-eval-jobs:
+        pkg-path: nix-eval-jobs
+      nix-fast-build:
+        pkg-path: nix-fast-build
+      nix-output-monitor:
+        pkg-path: nix-output-monitor
+      nix-tree:
+        pkg-path: nix-tree
+      nixd:
+        pkg-path: nixd
+      nixfmt-rfc-style:
+        pkg-path: nixfmt-rfc-style
+      nvfetcher:
+        pkg-path: nvfetcher
+      statix:
+        pkg-path: statix
+      watchexec:
+        pkg-path: watchexec
+    options: {}
+    version: 1

@@ -1,0 +1,31 @@
+version = 1
+
+[install]
+  [install.age]
+    pkg-path = 'age'
+
+  [install.gnupg]
+    pkg-path = 'gnupg'
+
+  [install.keychain]
+    pkg-path = 'keychain'
+
+  [install.pass]
+    pkg-path = 'pass'
+
+  [install.sops]
+    pkg-path = 'sops'
+
+  [install.ssh-to-age]
+    pkg-path = 'ssh-to-age'
+
+[options]
+
+[profile]
+  common = """
+if [[ -r $XDG_STATE_HOME/ssh-keys.d/github_signing ]]; then
+  set -a
+  SOPS_AGE_KEY="$( ssh-to-age -private-key < $XDG_STATE_HOME/ssh-keys.d/github_signing )"
+  set +a
+fi
+  """

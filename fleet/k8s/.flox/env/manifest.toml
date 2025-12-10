@@ -1,0 +1,92 @@
+version = 1
+
+[install]
+  [install.ceph-client]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'ceph-client'
+    systems = ['aarch64-linux']
+
+  [install.cilium-cli]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'cilium-cli'
+
+  [install.dasel]
+    pkg-group = 'yaml-tools'
+    pkg-path = 'dasel'
+    version = '^2.8.1'
+
+  [install.etcdctl]
+    pkg-group = 'etcd-tools'
+    pkg-path = 'etcdctl'
+    version = '^3.3.27'
+
+  [install.fluxcd]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'fluxcd'
+
+  [install.helmfile]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'helmfile'
+
+  [install.kpt]
+    pkg-group = 'kpt-tools'
+    pkg-path = 'kpt'
+
+  [install.krew]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'krew'
+
+  [install.kubecectl-doctor]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-doctor'
+
+  [install.kubectl]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'kubectl'
+
+  [install.kubectl-ai]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-ai'
+
+  [install.kubectl-explore]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-explore'
+
+  [install.kubectl-graph]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-graph'
+
+  [install.kubectl-ktop]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-ktop'
+
+  [install.kubectl-neat]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-neat'
+
+  [install.kubectl-rook-ceph]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-rook-ceph'
+
+  [install.kubectl-tree]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-tree'
+
+  [install.kubectl-view-secret]
+    pkg-group = 'kubectl-plugins'
+    pkg-path = 'kubectl-view-secret'
+
+  [install.kubernetes-helm]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'kubernetes-helm'
+
+  [install.tubekit]
+    pkg-group = 'kubectl-tools'
+    pkg-path = 'tubekit'
+
+  [install.yq-go]
+    pkg-group = 'yaml-tools'
+    pkg-path = 'yq-go'
+
+[options]
+  systems = ['aarch64-darwin', 'aarch64-linux']
