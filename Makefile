@@ -22,15 +22,12 @@ MANIFEST_TARGETS := $(addprefix $(OUTPUT_DIR)/,$(addsuffix /.flox/env/manifest.t
 ENV_JSON_TARGETS := $(addprefix $(OUTPUT_DIR)/,$(addsuffix /.flox/env.json,$(FLOX_ENV_NAMES)))
 RENDER_TARGETS := $(MANIFEST_TARGETS) $(ENV_JSON_TARGETS)
 
-.PHONY: all render clean-dist check-tools fleet-remote fleet-pull fleet-push
+.PHONY: all render check-tools fleet-remote fleet-pull fleet-push
 
 all: render
 
-render: check-tools clean-dist
+render: check-tools
 	$(MAKE) $(RENDER_TARGETS)
-
-clean-dist:
-	@rm -rf "$(OUTPUT_DIR)"
 
 check-tools:
 	missing="";
