@@ -1,0 +1,48 @@
+version = 1
+
+[include]
+  [[include.environments]]
+    dir = '/var/lib/git/nxmatic/fleet-manifests/flox/keyhole'
+
+[install]
+  [install.antora]
+    pkg-path = 'antora'
+
+  [install.antora-lunr-extension]
+    pkg-path = 'antora-lunr-extension'
+
+  [install.antora-ui-default]
+    pkg-path = 'antora-ui-default'
+
+  [install.asciidoctor-with-extensions]
+    pkg-path = 'asciidoctor-with-extensions'
+
+  [install.graphviz]
+    pkg-path = 'graphviz'
+
+  [install.jdk]
+    pkg-path = 'jdk'
+
+  [install.nodejs]
+    pkg-path = 'nodejs'
+
+  [install.plantuml]
+    pkg-path = 'plantuml'
+
+  [install.pnpm]
+    pkg-path = 'pnpm'
+
+[options]
+  systems = ['aarch64-darwin', 'aarch64-linux', 'x86_64-linux', 'x86_64-darwin']
+
+[profile]
+  common = """
+    export ANTORA_CACHE_DIR="${FLOX_ENV_PROJECT}/.cache/antora"
+    export DOCS_BUILD_DIR="${FLOX_ENV_PROJECT}/.output/docs"
+    : "${KROKI_SERVER_URL:=https://kroki.io}"
+    export KROKI_SERVER_URL
+    mkdir -p "${ANTORA_CACHE_DIR}" "${DOCS_BUILD_DIR}"
+    if [ -x "${FLOX_ENV_PROJECT}/node_modules/.bin/antora" ]; then
+      export PATH="${FLOX_ENV_PROJECT}/node_modules/.bin:${PATH}"
+    fi
+  """

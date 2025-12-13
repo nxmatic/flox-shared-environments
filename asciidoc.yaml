@@ -1,0 +1,48 @@
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: asciidoc
+spec:
+  manifest:
+    version: 1
+    install:
+      asciidoctor-with-extensions:
+        pkg-path: asciidoctor-with-extensions
+      plantuml:
+        pkg-path: plantuml
+      graphviz:
+        pkg-path: graphviz
+      jdk:
+        pkg-path: jdk
+      nodejs:
+        pkg-path: nodejs
+      pnpm:
+        pkg-path: pnpm
+      antora:
+        pkg-path: antora
+      antora-ui-default:
+        pkg-path: antora-ui-default
+      antora-lunr-extension:
+        pkg-path: antora-lunr-extension
+    profile:
+      common: |
+        export ANTORA_CACHE_DIR="${FLOX_ENV_PROJECT}/.cache/antora"
+        export DOCS_BUILD_DIR="${FLOX_ENV_PROJECT}/.output/docs"
+        : "${KROKI_SERVER_URL:=https://kroki.io}"
+        export KROKI_SERVER_URL
+        mkdir -p "${ANTORA_CACHE_DIR}" "${DOCS_BUILD_DIR}"
+        if [ -x "${FLOX_ENV_PROJECT}/node_modules/.bin/antora" ]; then
+          export PATH="${FLOX_ENV_PROJECT}/node_modules/.bin:${PATH}"
+        fi
+    include:
+      environments:
+        - dir: /var/lib/git/nxmatic/fleet-manifests/flox/keyhole # kpt-set: ${fleet-base-dir}/keyhole
+    options:
+      systems:
+        - aarch64-darwin
+        - aarch64-linux
+        - x86_64-linux
+        - x86_64-darwin
+  env:
+    name: asciidoc
+    version: 1
