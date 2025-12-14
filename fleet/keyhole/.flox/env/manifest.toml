@@ -2,27 +2,35 @@ version = 1
 
 [install]
   [install.age]
+    pkg-group = 'keyhole'
     pkg-path = 'age'
 
   [install.gnupg]
+    pkg-group = 'keyhole'
     pkg-path = 'gnupg'
 
   [install.keychain]
+    pkg-group = 'keyhole'
     pkg-path = 'keychain'
 
   [install.openssh]
+    pkg-group = 'keyhole'
     pkg-path = 'openssh'
 
   [install.openssl]
+    pkg-group = 'keyhole'
     pkg-path = 'openssl'
 
   [install.pass]
+    pkg-group = 'keyhole'
     pkg-path = 'pass'
 
   [install.sops]
+    pkg-group = 'keyhole'
     pkg-path = 'sops'
 
   [install.ssh-to-age]
+    pkg-group = 'keyhole'
     pkg-path = 'ssh-to-age'
 
 [options]

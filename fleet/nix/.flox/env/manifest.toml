@@ -6,36 +6,47 @@ version = 1
 
 [install]
   [install.cachix]
+    pkg-group = 'nix'
     pkg-path = 'cachix'
 
   [install.deadnix]
+    pkg-group = 'nix'
     pkg-path = 'deadnix'
 
   [install.nix-eval-jobs]
+    pkg-group = 'nix'
     pkg-path = 'nix-eval-jobs'
 
   [install.nix-fast-build]
+    pkg-group = 'nix'
     pkg-path = 'nix-fast-build'
 
   [install.nix-output-monitor]
+    pkg-group = 'nix'
     pkg-path = 'nix-output-monitor'
 
   [install.nix-tree]
+    pkg-group = 'nix'
     pkg-path = 'nix-tree'
 
   [install.nixd]
+    pkg-group = 'nix'
     pkg-path = 'nixd'
 
   [install.nixfmt-rfc-style]
+    pkg-group = 'nix'
     pkg-path = 'nixfmt-rfc-style'
 
   [install.nvfetcher]
+    pkg-group = 'nix'
     pkg-path = 'nvfetcher'
 
   [install.statix]
+    pkg-group = 'nix'
     pkg-path = 'statix'
 
   [install.watchexec]
+    pkg-group = 'nix'
     pkg-path = 'watchexec'
 
 [options]

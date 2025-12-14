@@ -6,30 +6,39 @@ version = 1
 
 [install]
   [install.antora]
+    pkg-group = 'asciidoc'
     pkg-path = 'antora'
 
   [install.antora-lunr-extension]
+    pkg-group = 'asciidoc'
     pkg-path = 'antora-lunr-extension'
 
   [install.antora-ui-default]
+    pkg-group = 'asciidoc'
     pkg-path = 'antora-ui-default'
 
   [install.asciidoctor-with-extensions]
+    pkg-group = 'asciidoc'
     pkg-path = 'asciidoctor-with-extensions'
 
   [install.graphviz]
+    pkg-group = 'asciidoc'
     pkg-path = 'graphviz'
 
   [install.jdk]
+    pkg-group = 'asciidoc'
     pkg-path = 'jdk'
 
   [install.nodejs]
+    pkg-group = 'asciidoc'
     pkg-path = 'nodejs'
 
   [install.plantuml]
+    pkg-group = 'asciidoc'
     pkg-path = 'plantuml'
 
   [install.pnpm]
+    pkg-group = 'asciidoc'
     pkg-path = 'pnpm'
 
 [options]

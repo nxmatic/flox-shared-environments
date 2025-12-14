@@ -2,12 +2,15 @@ version = 1
 
 [install]
   [install.xdg-ninja]
+    pkg-group = 'xdg'
     pkg-path = 'xdg-ninja'
 
   [install.xdg-user-dirs]
+    pkg-group = 'xdg'
     pkg-path = 'xdg-user-dirs'
 
   [install.xdg-utils]
+    pkg-group = 'xdg'
     pkg-path = 'xdg-utils'
 
 [options]

@@ -6,9 +6,11 @@ version = 1
 
 [install]
   [install.dig]
+    pkg-group = 'dns-tools'
     pkg-path = 'dig'
 
   [install.dnsmasq]
+    pkg-group = 'dns-tools'
     pkg-path = 'dnsmasq'
 
 [options]

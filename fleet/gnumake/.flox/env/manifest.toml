@@ -2,9 +2,11 @@ version = 1
 
 [install]
   [install.gnumake]
+    pkg-group = 'gnumake'
     pkg-path = 'gnumake'
 
   [install.remake]
+    pkg-group = 'gnumake'
     pkg-path = 'remake'
 
 [options]

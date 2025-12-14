@@ -2,12 +2,12 @@ version = 1
 
 [install]
   [install.dasel]
-    pkg-group = 'yaml-tools'
+    pkg-group = 'manifest-tools-yaml-tools'
     pkg-path = 'dasel'
     version = '^2.8.1'
 
   [install.yq-go]
-    pkg-group = 'yaml-tools'
+    pkg-group = 'manifest-tools-yaml-tools'
     pkg-path = 'yq-go'
 
 [options]

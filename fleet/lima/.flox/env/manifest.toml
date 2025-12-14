@@ -2,9 +2,11 @@ version = 1
 
 [install]
   [install.lima]
+    pkg-group = 'lima'
     pkg-path = 'lima'
 
   [install.vmnet]
+    pkg-group = 'lima'
     pkg-path = 'darwin.apple_sdk.frameworks.vmnet'
 
 [options]

@@ -6,32 +6,40 @@ version = 1
 
 [install]
   [install.conntrack_tools]
+    pkg-group = 'net-tools'
     pkg-path = 'conntrack_tools'
     systems = ['aarch64-linux']
 
   [install.dhcp]
+    pkg-group = 'net-tools'
     pkg-path = 'dhcp'
     systems = ['aarch64-linux']
 
   [install.ethtool]
+    pkg-group = 'net-tools'
     pkg-path = 'ethtool'
     systems = ['aarch64-linux']
 
   [install.ipcalc]
+    pkg-group = 'net-tools'
     pkg-path = 'ipcalc'
 
   [install.iptstate]
+    pkg-group = 'net-tools'
     pkg-path = 'iptstate'
     systems = ['aarch64-linux']
 
   [install.netplan]
+    pkg-group = 'net-tools'
     pkg-path = 'netplan'
     systems = ['aarch64-linux']
 
   [install.nmap]
+    pkg-group = 'net-tools'
     pkg-path = 'nmap'
 
   [install.tshark]
+    pkg-group = 'net-tools'
     pkg-path = 'tshark'
 
 [options]

@@ -10,11 +10,11 @@ SETTERS_IMAGE ?= gcr.io/kpt-fn/apply-setters:v0.4.1
 SETTERS_CONFIG ?= setters.yaml
 FLEET_BASE_DIR ?= /var/lib/git/nxmatic/fleet/flox
 
-SHELL ?= bash
+SHELL := bash
 .SHELLFLAGS := -exu -o pipefail -c
 .ONESHELL:
 
-.PRECIOUS: $(OUTPUT_DIR)/%/.flox/env $(OUTPUT_DIR)/%/.flox/run $(BUILD_YAML)
+.PRECIOUS: $(OUTPUT_DIR)/%/.flox/env $(BUILD_YAML)
 
 FLOX_ENV_FILES := $(filter-out kustomization.yaml Kptfile setters.yaml,$(wildcard *.yaml))
 FLOX_ENV_NAMES := $(basename $(notdir $(FLOX_ENV_FILES)))
@@ -65,15 +65,34 @@ $(BUILD_YAML): $(PKG_SOURCES)
 $(OUTPUT_DIR)/%/.flox/env:
 	mkdir -p "$@"
 
-$(OUTPUT_DIR)/%/.flox/run:
-	mkdir -p "$@"
-
-$(OUTPUT_DIR)/%/.flox/env/manifest.toml: $(BUILD_YAML) | $(OUTPUT_DIR)/%/.flox/env $(OUTPUT_DIR)/%/.flox/run
-	$(YQ) eval "select(.kind == \"FloxEnvironment\" and .metadata.name == \"$*\") | .spec.manifest" "$(BUILD_YAML)" | \
+$(OUTPUT_DIR)/%/.flox/env/manifest.toml: $(BUILD_YAML) | $(OUTPUT_DIR)/%/.flox/env
+	NAME="$*" \
+	$(YQ) eval '
+	  select(.kind == "FloxEnvironment" and .metadata.name == env(NAME)) |
+	  (.spec.manifest.install // {}) as $$install |
+	  .spec.manifest.install = (
+	    $$install |
+	    with_entries(
+	      .value |= (
+	        (. // {}) |
+	        . * {
+	          "pkg-group": (
+	            (
+	              .pkg-group |
+	              select(. != null) |
+	              (env(NAME) + "-" + .)
+	            ) // env(NAME)
+	          )
+	        }
+	      )
+	    )
+	  ) |
+	  .spec.manifest
+	' "$(BUILD_YAML)" | \
 		$(DASEL) -r yaml -w toml -f /dev/stdin > "$@"
 	$(PYTHON) "$(FIX_TOML)" "$@"
 
-$(OUTPUT_DIR)/%/.flox/env.json: $(BUILD_YAML) | $(OUTPUT_DIR)/%/.flox/env $(OUTPUT_DIR)/%/.flox/run
+$(OUTPUT_DIR)/%/.flox/env.json: $(BUILD_YAML) | $(OUTPUT_DIR)/%/.flox/env
 	$(YQ) eval "select(.kind == \"FloxEnvironment\" and .metadata.name == \"$*\") | .spec.env" "$(BUILD_YAML)" | \
 		$(DASEL) -r yaml -w json -f /dev/stdin > "$@"
 

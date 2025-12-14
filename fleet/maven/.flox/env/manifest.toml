@@ -2,9 +2,11 @@ version = 1
 
 [install]
   [install.jre-headless]
+    pkg-group = 'maven'
     pkg-path = 'jre_headless'
 
   [install.maven]
+    pkg-group = 'maven'
     pkg-path = 'maven'
 
 [options]

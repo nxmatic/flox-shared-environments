@@ -9,13 +9,16 @@ version = 1
 
 [install]
   [install.direnv]
+    pkg-group = 'home'
     pkg-path = 'direnv'
 
   [install.linux-builder]
+    pkg-group = 'home'
     pkg-path = 'darwin.linux-builder'
     systems = ['aarch64-darwin']
 
   [install.lldpd]
+    pkg-group = 'home'
     pkg-path = 'lldpd'
 
 [options]
