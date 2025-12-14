@@ -13,7 +13,6 @@ localIncludes:
 packages:
   - ceph-client
   - cilium-cli
-  - dasel
   - etcdctl
   - fluxcd
   - helmfile

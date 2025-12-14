@@ -14,10 +14,6 @@ spec:
       cilium-cli:
         pkg-path: cilium-cli
         pkg-group: kubectl-tools
-      dasel:
-        pkg-path: dasel
-        version: ^2.8.1
-        pkg-group: yaml-tools
       etcdctl:
         pkg-path: etcdctl
         version: ^3.3.27
