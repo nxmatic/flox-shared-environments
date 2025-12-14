@@ -11,20 +11,6 @@ includes:
 localIncludes:
   - keyhole
 packages:
-  - dnsmasq
-  - dig
----
-apiVersion: nxmatic.dev/v1alpha1
-kind: FloxEnvironment
-name: net-tools
-source: net-tools.yaml
-manifest: flox/net-tools/.flox/env/manifest.toml
-envJson: flox/net-tools/.flox/env.json
-includes:
-  - /var/lib/git/nxmatic/fleet/flox/keyhole # kpt-set: ${fleet-base-dir}/keyhole
-localIncludes:
-  - keyhole
-packages:
   - conntrack_tools
   - dhcp
   - ethtool

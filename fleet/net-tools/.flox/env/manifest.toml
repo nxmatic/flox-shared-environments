@@ -5,33 +5,6 @@ version = 1
     dir = '/var/lib/git/nxmatic/fleet/flox/keyhole'
 
 [install]
-  [install.dig]
-    pkg-path = 'dig'
-
-  [install.dnsmasq]
-    pkg-path = 'dnsmasq'
-
-[options]
-  systems = ['aarch64-darwin', 'aarch64-linux', 'x86_64-linux', 'x86_64-darwin']
-
-[profile]
-  common = """
-    export ANTORA_CACHE_DIR="${FLOX_ENV_PROJECT}/.cache/antora"
-    export DOCS_BUILD_DIR="${FLOX_ENV_PROJECT}/.output/docs"
-    : "${KROKI_SERVER_URL:=https://kroki.io}"
-    export KROKI_SERVER_URL
-    mkdir -p "${ANTORA_CACHE_DIR}" "${DOCS_BUILD_DIR}"
-    if [ -x "${FLOX_ENV_PROJECT}/node_modules/.bin/antora" ]; then
-      export PATH="${FLOX_ENV_PROJECT}/node_modules/.bin:${PATH}"
-    fi
-  """
-version = 1
-
-[include]
-  [[include.environments]]
-    dir = '/var/lib/git/nxmatic/fleet/flox/keyhole'
-
-[install]
   [install.conntrack_tools]
     pkg-path = 'conntrack_tools'
     systems = ['aarch64-linux']

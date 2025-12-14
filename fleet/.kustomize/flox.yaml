@@ -59,7 +59,7 @@ spec:
 apiVersion: flox.dev/v1alpha1
 kind: FloxEnvironment
 metadata:
-  name: net-tools
+  name: dns-tools
 spec:
   manifest:
     version: 1
