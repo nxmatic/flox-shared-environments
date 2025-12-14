@@ -10,8 +10,10 @@ includes: []
 localIncludes: []
 packages:
   - age
-  - ssh-to-age
-  - keychain
   - gnupg
+  - keychain
   - pass
   - sops
+  - openssh
+  - openssl
+  - ssh-to-age

@@ -8,16 +8,20 @@ spec:
     install:
       age:
         pkg-path: age
-      ssh-to-age:
-        pkg-path: ssh-to-age
-      keychain:
-        pkg-path: keychain
       gnupg:
         pkg-path: gnupg
+      keychain:
+        pkg-path: keychain
       pass:
         pkg-path: pass
       sops:
         pkg-path: sops
+      openssh:
+        pkg-path: openssh
+      openssl:
+        pkg-path: openssl
+      ssh-to-age:
+        pkg-path: ssh-to-age
     profile:
       common: |
         if [[ -r $XDG_STATE_HOME/ssh-keys.d/github_signing ]]; then

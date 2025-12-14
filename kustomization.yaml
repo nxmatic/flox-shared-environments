@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - asciidoc.yaml
   - git.yaml
+  - gmake.yaml
   - home.yaml
   - k8s.yaml
   - keyhole.yaml

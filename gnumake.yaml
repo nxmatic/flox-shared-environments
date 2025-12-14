@@ -1,0 +1,16 @@
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: gnumake
+spec:
+  manifest:
+    version: 1
+    install:
+      gnumake:
+        pkg-path: gnumake
+      remake:
+        pkg-path: remake
+    options: {}
+  env:
+    name: gnumake
+    version: 1

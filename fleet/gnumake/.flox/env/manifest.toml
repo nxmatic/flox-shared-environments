@@ -1,0 +1,10 @@
+version = 1
+
+[install]
+  [install.gnumake]
+    pkg-path = 'gnumake'
+
+  [install.remake]
+    pkg-path = 'remake'
+
+[options]

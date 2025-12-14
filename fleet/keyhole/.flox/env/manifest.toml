@@ -10,6 +10,12 @@ version = 1
   [install.keychain]
     pkg-path = 'keychain'
 
+  [install.openssh]
+    pkg-path = 'openssh'
+
+  [install.openssl]
+    pkg-path = 'openssl'
+
   [install.pass]
     pkg-path = 'pass'
 

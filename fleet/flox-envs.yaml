@@ -31,6 +31,16 @@ environments:
 apiVersion: nxmatic.dev/v1alpha1
 kind: FloxEnvironmentDescriptor
 environments:
+  - name: gnumake
+    source: gnumake.yaml
+    manifest: flox/gnumake/.flox/env/manifest.toml
+    envJson: flox/gnumake/.flox/env.json
+    includes: []
+    localIncludes: []
+---
+apiVersion: nxmatic.dev/v1alpha1
+kind: FloxEnvironmentDescriptor
+environments:
   - name: home
     source: home.yaml
     manifest: flox/home/.flox/env/manifest.toml
