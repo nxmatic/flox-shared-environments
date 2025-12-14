@@ -493,7 +493,7 @@ spec:
         - x86_64-linux
         - x86_64-darwin
   env:
-    name: asciidoc
+    name: net-tools
     version: 1
 ---
 apiVersion: flox.dev/v1alpha1
