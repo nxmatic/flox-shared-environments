@@ -19,6 +19,18 @@ environments:
 apiVersion: nxmatic.dev/v1alpha1
 kind: FloxEnvironmentDescriptor
 environments:
+  - name: net-tools
+    source: net-tools.yaml
+    manifest: flox/net-tools/.flox/env/manifest.toml
+    envJson: flox/net-tools/.flox/env.json
+    includes:
+      - /var/lib/git/nxmatic/fleet/flox/keyhole # kpt-set: ${fleet-base-dir}/keyhole
+    localIncludes:
+      - keyhole
+---
+apiVersion: nxmatic.dev/v1alpha1
+kind: FloxEnvironmentDescriptor
+environments:
   - name: git
     source: git.yaml
     manifest: flox/git/.flox/env/manifest.toml
@@ -107,6 +119,18 @@ environments:
     envJson: flox/maven/.flox/env.json
     includes: []
     localIncludes: []
+---
+apiVersion: nxmatic.dev/v1alpha1
+kind: FloxEnvironmentDescriptor
+environments:
+  - name: net-tools
+    source: net-tools.yaml
+    manifest: flox/net-tools/.flox/env/manifest.toml
+    envJson: flox/net-tools/.flox/env.json
+    includes:
+      - /var/lib/git/nxmatic/fleet/flox/keyhole # kpt-set: ${fleet-base-dir}/keyhole
+    localIncludes:
+      - keyhole
 ---
 apiVersion: nxmatic.dev/v1alpha1
 kind: FloxEnvironmentDescriptor

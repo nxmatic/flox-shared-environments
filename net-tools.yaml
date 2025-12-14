@@ -1,0 +1,56 @@
+apiVersion: flox.dev/v1alpha1
+kind: FloxEnvironment
+metadata:
+  name: net-tools
+spec:
+  manifest:
+    version: 1
+    install:
+      conntrack_tools:
+        pkg-path: conntrack_tools
+        systems:
+          - aarch64-linux
+      dhcp:
+        pkg-path: dhcp
+        systems:
+          - aarch64-linux
+      ethtool:
+        pkg-path: ethtool
+        systems:
+          - aarch64-linux
+      ipcalc:
+        pkg-path: ipcalc
+      iptstate:
+        pkg-path: iptstate
+        systems:
+          - aarch64-linux
+      netplan:
+        pkg-path: netplan
+        systems:
+          - aarch64-linux
+      nmap:
+        pkg-path: nmap
+      tshark:
+        pkg-path: tshark
+    profile:
+      common: |
+        export ANTORA_CACHE_DIR="${FLOX_ENV_PROJECT}/.cache/antora"
+        export DOCS_BUILD_DIR="${FLOX_ENV_PROJECT}/.output/docs"
+        : "${KROKI_SERVER_URL:=https://kroki.io}"
+        export KROKI_SERVER_URL
+        mkdir -p "${ANTORA_CACHE_DIR}" "${DOCS_BUILD_DIR}"
+        if [ -x "${FLOX_ENV_PROJECT}/node_modules/.bin/antora" ]; then
+          export PATH="${FLOX_ENV_PROJECT}/node_modules/.bin:${PATH}"
+        fi
+    include:
+      environments:
+        - dir: /var/lib/git/nxmatic/fleet/flox/keyhole # kpt-set: ${fleet-base-dir}/keyhole
+    options:
+      systems:
+        - aarch64-darwin
+        - aarch64-linux
+        - x86_64-linux
+        - x86_64-darwin
+  env:
+    name: asciidoc
+    version: 1
